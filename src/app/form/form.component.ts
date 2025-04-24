@@ -104,7 +104,6 @@ export class FormComponent implements OnInit {
   enviarEvento(){
     this.localStorageService.removeTodosLocal();
 
-  // Reseta a interface
   this.evento = {
     evento: '',
     modalidade: '',
