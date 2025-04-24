@@ -1,0 +1,136 @@
+<!-- <form [formGroup]="form" (ngSubmit)="salvar()">
+    <label class="form-label">Evento Selecionado:</label>
+    <select formControlName="evento" class="form-control">
+      <option value="">Selecione...</option>
+      <option *ngFor="let e of eventos" [value]="e">{{ e }}</option>
+    </select>
+    <div *ngIf="form.get('evento')?.touched && form.get('evento')?.invalid" class="invalid">
+      Evento é obrigatório.
+    </div>
+  
+    <label class="form-label">Modalidade:</label>
+    <select formControlName="modalidade" class="form-control">
+      <option value="">Selecione...</option>
+      <option *ngFor="let m of modalidades" [value]="m">{{ m }}</option>
+    </select>
+    <div *ngIf="form.get('modalidade')?.touched && form.get('modalidade')?.invalid" class="invalid">
+      Modalidade é obrigatória.
+    </div>
+  
+    <label class="form-label">Data de Início:</label>
+    <input type="date" formControlName="dataInicio" class="form-control">
+  
+    <label class="form-label">Data de Término:</label>
+    <input type="date" formControlName="dataTermino" class="form-control">
+    <div *ngIf="form.errors?.['dataInvalida']" class="invalid">
+      A data de término deve ser posterior à data de início.
+    </div>
+  
+    <h5 class="mt-4">Cadastrar Participantes:</h5>
+    <div formArrayName="participantes">
+      <div *ngFor="let participante of participantes.controls; let i = index" [formGroupName]="i" class="mb-3 p-3 border rounded">
+        <label>Nome Completo:</label>
+        <input type="text" formControlName="nome" class="form-control">
+        <div class="invalid" *ngIf="participante.get('nome')?.invalid && participante.get('nome')?.touched">
+          Nome é obrigatório.
+        </div>
+  
+        <label>Email:</label>
+        <input type="email" formControlName="email" class="form-control">
+        <div class="invalid" *ngIf="participante.get('email')?.invalid && participante.get('email')?.touched">
+          Email inválido ou obrigatório.
+        </div>
+  
+        <label>CPF:</label>
+        <input type="text" formControlName="cpf" class="form-control" placeholder="000.000.000-00">
+        <div class="invalid" *ngIf="participante.get('cpf')?.invalid && participante.get('cpf')?.touched">
+          CPF obrigatório (formato: XXX.XXX.XXX-XX).
+        </div>
+  
+        <label>Tipo de Ingresso:</label>
+        <select formControlName="ingresso" class="form-control">
+          <option value="">Selecione...</option>
+          <option *ngFor="let tipo of tiposIngresso" [value]="tipo">{{ tipo }}</option>
+        </select>
+        <div class="invalid" *ngIf="participante.get('ingresso')?.invalid && participante.get('ingresso')?.touched">
+          Tipo de ingresso obrigatório.
+        </div>
+  
+        <button type="button" class="btn btn-danger mt-2" (click)="removerParticipante(i)">Remover Participante</button>
+      </div>
+    </div>
+  
+    <button type="button" class="btn btn-secondary mt-3" (click)="adicionarParticipante()">Adicionar Participante</button>
+    <br>
+    <button type="submit" class="btn btn-primary mt-3" [disabled]="!form.valid">Salvar</button>
+  </form>
+   -->
+
+   <form [formGroup]="form" (ngSubmit)="salvarEvento()">
+    <label class="form-label">Evento Selecionado:</label>
+    <select formControlName="evento" class="form-control">
+      <option value="">Selecione...</option>
+      <option *ngFor="let e of eventos" [value]="e">{{ e }}</option>
+    </select>
+    <div *ngIf="form.get('evento')?.touched && form.get('evento')?.invalid" class="invalid">
+      Evento é obrigatório.
+    </div>
+  
+    <label class="form-label">Modalidade:</label>
+    <select formControlName="modalidade" class="form-control">
+      <option value="">Selecione...</option>
+      <option *ngFor="let m of modalidades" [value]="m">{{ m }}</option>
+    </select>
+    <div *ngIf="form.get('modalidade')?.touched && form.get('modalidade')?.invalid" class="invalid">
+      Modalidade é obrigatória.
+    </div>
+  
+    <label class="form-label">Data de Início:</label>
+    <input type="date" formControlName="dataInicio" class="form-control">
+  
+    <label class="form-label">Data de Término:</label>
+    <input type="date" formControlName="dataTermino" class="form-control">
+    <div *ngIf="form.errors?.['dataInvalida']" class="invalid">
+      A data de término deve ser posterior à data de início.
+    </div>
+  
+    <h5 class="mt-4">Cadastrar Participantes:</h5>
+    <div formArrayName="participantes" *ngIf="participantes">
+      <div *ngFor="let participante of participantes.controls; let i = index" [formGroupName]="i" class="mb-3 p-3 border rounded">
+        <label>Nome Completo:</label>
+        <input type="text" formControlName="nome" class="form-control">
+        <div class="invalid" *ngIf="participante.get('nome')?.invalid && participante.get('nome')?.touched">
+          Nome é obrigatório.
+        </div>
+  
+        <label>Email:</label>
+        <input type="email" formControlName="email" class="form-control">
+        <div class="invalid" *ngIf="participante.get('email')?.invalid && participante.get('email')?.touched">
+          Email inválido ou obrigatório.
+        </div>
+  
+        <label>CPF:</label>
+        <input type="text" formControlName="cpf" class="form-control" placeholder="000.000.000-00">
+        <div class="invalid" *ngIf="participante.get('cpf')?.invalid && participante.get('cpf')?.touched">
+          CPF obrigatório (formato: XXX.XXX.XXX-XX).
+        </div>
+  
+        <label>Tipo de Ingresso:</label>
+        <select formControlName="ingresso" class="form-control">
+          <option value="">Selecione...</option>
+          <option *ngFor="let tipo of tiposIngresso" [value]="tipo">{{ tipo }}</option>
+        </select>
+        <div class="invalid" *ngIf="participante.get('ingresso')?.invalid && participante.get('ingresso')?.touched">
+          Tipo de ingresso obrigatório.
+        </div>
+  
+        <button type="button" class="btn btn-danger mt-2" (click)="removerParticipante(i)">Remover Participante</button>
+      </div>
+    </div>
+  
+    <button type="button" class="btn btn-secondary mt-3" (click)="adicionarParticipante()">Adicionar Participante</button>
+    <br>
+    <button type="submit" class="btn btn-primary mt-3 me-2" (click)="salvarEvento()" [disabled]="!form.valid">Salvar</button>
+    <button type="submit" class="btn btn-primary mt-3 me-2" (click)="enviarEvento()" [disabled]="!form.valid">Enviar</button>
+
+  </form>
